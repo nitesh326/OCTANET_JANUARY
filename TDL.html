@@ -1,0 +1,95 @@
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        body {
+			background-color:black;
+            font-family:Times New Roman, Times, serif;
+            margin: 20px;
+			
+        }
+        h2 {
+			font-family:Arial, sans-serif;
+			font-size: 2em;
+            color: indianred;
+        }
+		label{
+		color:white;
+		}
+		
+		
+        input, select, button {
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+		color:white;
+            margin-bottom: 10px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 align="center">To-Do List</h2>
+
+    <label for="task">TASK:</label>
+    <input type="text" id="task" placeholder="Enter your task..">
+
+    <label for="category">CATEGORY:</label>
+    <select id="category">
+        <option value="design">Design</option>
+        <option value="development">Development</option>
+    </select>
+
+    <label  for="priority">PRIORITY:</label>
+    <select id="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+    </select>
+
+    <label for="deadline">DEADLINE:</label>
+    <input type="date" id="deadline">
+
+    <button onclick="addTask()">Add Task</button>
+
+    <ul id="taskList">
+    </ul>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("task");
+            var categoryInput = document.getElementById("category");
+            var priorityInput = document.getElementById("priority");
+            var deadlineInput = document.getElementById("deadline");
+            var taskList = document.getElementById("taskList");
+
+            if (taskInput.value.trim() !== "") {
+                var newTask = document.createElement("li");
+                newTask.innerHTML = `
+                    <input type="checkbox" onchange="toggleTask(this)">
+                    <strong>${taskInput.value}</strong>
+                    <br>
+                    Category: ${categoryInput.value}, Priority: ${priorityInput.value}, Deadline: ${deadlineInput.value}
+                `;
+                taskList.appendChild(newTask);
+                taskInput.value = "";
+            }
+        }
+
+        function toggleTask(checkbox) {
+            var task = checkbox.parentNode;
+            task.classList.toggle("completed", checkbox.checked);
+        }
+    </script>
+
+</body>
+</html>
